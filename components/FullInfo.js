@@ -1,10 +1,16 @@
-import React, { useReducer, createContext, useContext, useCallback, useMemo } from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, Button } from 'react-native';
-import { gStyle } from '../styles/style';
+import React, {
+  useReducer,
+  createContext,
+  useContext,
+  useCallback,
+  useMemo,
+} from "react";
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View, Image, Button } from "react-native";
+import { gStyle } from "../styles/style";
 
 const ActionTypes = {
-  INCREMENT: 'INCREMENT',
+  INCREMENT: "INCREMENT",
 };
 
 const ShareCounterContext = createContext();
@@ -35,23 +41,26 @@ export default function FullItem({ route }) {
   }, [PublishTime]);
 
   return (
-    <ShareCounterContext.Provider value={{ shareCounterState: state, shareCounterDispatch: dispatch }}>
+    <ShareCounterContext.Provider
+      value={{ shareCounterState: state, shareCounterDispatch: dispatch }}
+    >
       <View style={gStyle.main}>
-        <Image source={{
-          width: '100%',
-          height: 270,
-          uri: route.params.img
-        }}/>
+        <Image
+          testID="image"
+          accessibilityLabel="item-image"
+          source={{
+            width: "100%",
+            height: 270,
+            uri: route.params.img,
+          }}
+        />
         <Text style={[gStyle.title, styles.title]}>{route.params.name}</Text>
         <Text style={gStyle.text}>{route.params.full}</Text>
         <View style={styles.publishTimeContainer}>
-          <Text>{formattedPublishTime}</Text>
+          <Text testID="publish-time">{formattedPublishTime}</Text>
         </View>
         <View style={styles.shareContainer}>
-          <Button
-            title="Share"
-            onPress={handleShare}
-          />
+          <Button title="Share" onPress={handleShare} />
           <Text>Shares: {state.count}</Text>
         </View>
         <StatusBar style="auto" />
@@ -64,15 +73,15 @@ const styles = StyleSheet.create({
   title: {
     marginTop: 15,
     borderBottomWidth: 1,
-    borderBottomColor: '#808080',
-    paddingBottom: 5, 
+    borderBottomColor: "#808080",
+    paddingBottom: 5,
   },
   publishTimeContainer: {
     marginTop: 10,
   },
   shareContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginTop: 10,
   },
 });
